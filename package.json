@@ -1,0 +1,25 @@
+{
+  "name": "loopy",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/lazarljubenovic/loopy",
+  "author": "Lazar Ljubenović <lazar.ljubenovic.1995@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\"}' mocha -r ts-node/register src/**/*.spec.ts"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
+    "rollup": "^1.16.2",
+    "rollup-plugin-copy": "^3.0.0",
+    "rollup-plugin-node-resolve": "^5.1.0",
+    "rollup-plugin-typescript2": "^0.21.2",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "dependencies": {}
+}
