@@ -388,11 +388,11 @@ class Game {
     this.ROOT.append(gameCompleteRoot)
   }
 
-  public async main() {
+  public main() {
     this.loadLevel()
   }
 
 }
 
 const game = new Game()
-game.main().catch(console.error)
+game.main()
