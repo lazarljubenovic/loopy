@@ -315,8 +315,13 @@ class Game {
     ['#E0E1DD', '#415A77'],
     ['#CFF27E', '#523A34'],
     ['#E2C2C6', '#610F7F'],
-    ['#F7F5FB', '#084887'],
     ['#E5F77D', '#823038'],
+    ['#F7F5FB', '#084887'],
+    ['#F2F3AE', '#020122'],
+    ['#CBEFB6', '#635D5C'],
+    ['#F4FFF8', '#1C3738'],
+    ['#F4FAFF', '#8789C0'],
+    ['#94B9AF', '#593837'],
   ]
 
   private LEVELS = [
@@ -342,19 +347,25 @@ class Game {
       if (!this.isWaitingForClickToGoToNextLevel) return
       this.currentLevel++
       document.getElementById('level')!.remove()
-      this.loadCurrentLevel()
+      this.loadLevel()
       this.isWaitingForClickToGoToNextLevel = false
     })
   }
 
-  private loadLevel (level: number) {
+  private loadLevel (levelNumber: number = this.currentLevel) {
+    const level = this.LEVELS[levelNumber]
+    if (level == null) {
+      this.loadEndScreen()
+      return
+    }
+
     const board = new Board(5, 5)
-    board.defineLevel(this.LEVELS[level])
-    board.scramble()
+    board.defineLevel(this.LEVELS[levelNumber])
+    // board.scramble()
 
     const levelRoot = document.createElement('div')
     levelRoot.id = 'level'
-    const renderer = new BoardRenderer(levelRoot, board, level + 1)
+    const renderer = new BoardRenderer(levelRoot, board, levelNumber + 1)
     renderer.drawBoard()
     renderer.addEventListeners()
     renderer.onComplete(() => {
@@ -362,7 +373,7 @@ class Game {
       this.isWaitingForClickToGoToNextLevel = true
     })
 
-    const colorScheme = this.colorSchemes[level % this.colorSchemes.length]
+    const colorScheme = this.colorSchemes[levelNumber % this.colorSchemes.length]
     const [background, foreground] = colorScheme
     document.documentElement.style.setProperty('--background', background)
     document.documentElement.style.setProperty('--foreground', foreground)
@@ -370,12 +381,15 @@ class Game {
     this.ROOT.append(levelRoot)
   }
 
-  public loadCurrentLevel () {
-    this.loadLevel(this.currentLevel)
+  private loadEndScreen () {
+    const gameCompleteRoot = document.createElement('div')
+    gameCompleteRoot.id = 'game-complete'
+    gameCompleteRoot.innerText = `Game complete!`
+    this.ROOT.append(gameCompleteRoot)
   }
 
   public async main() {
-    this.loadCurrentLevel()
+    this.loadLevel()
   }
 
 }
