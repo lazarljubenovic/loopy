@@ -9,8 +9,8 @@
   <style>
 
     :root {
-      --background: yellow;
-      --foreground: red;
+      --background: #E0E1DD;
+      --foreground: #415A77;
     }
 
     * {
@@ -55,8 +55,10 @@
       transition: transform .12s ease-out;
     }
 
-    #level > svg > g > path {
+    svg path {
       stroke: var(--foreground);
+      fill: none;
+      stroke-width: 3;
     }
 
     #level-counter {
@@ -90,6 +92,20 @@
       font-weight: 200;
       font-size: 3.33vw;
       letter-spacing: 6px;
+    }
+
+    #looks rect {
+      fill: transparent;
+      stroke: var(--foreground);
+      opacity: 0.2;
+      stroke-width: 1;
+    }
+
+    #buttons circle {
+      fill: transparent;
+      stroke: var(--foreground);
+      stroke-width: 3;
+      opacity: 0.1;
     }
   </style>
 </head>
